@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlamSync Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>💄 GlamSync</h1>
+        <p>Your Beauty, Your Style, Your Confidence!</p>
+    </div>
+    <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#gallery">Makeup Gallery</a>
+    <a href="#makeup">Makeup Suggestions</a>
+    <a href="#outfit">Outfit Matching</a>
+    <a href="#preferences">Preferences</a>
+    <a href="#assistant">Beauty Assistant</a>
+    <a href="#history">Makeup History</a>
+</nav>
+
+<main class="container">
+
+    <!-- HOME -->
+    <section id="home" class="welcome">
+        <h2>Welcome to GlamSync! 💖</h2>
+        <p>Discover beautiful makeup looks and outfit colour combinations.</p>
+        <a class="explore-btn" href="#gallery">Explore Makeup Looks ↓</a>
+    </section>
+
+    <!-- MAKEUP GALLERY -->
+    <section id="gallery" class="section">
+        <h2>💄 Explore Makeup Looks</h2>
+        <p>Discover inspiration for every occasion!</p>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+            <button class="filter-btn" onclick="filterGallery('natural', this)">Natural</button>
+            <button class="filter-btn" onclick="filterGallery('casual', this)">Casual</button>
+            <button class="filter-btn" onclick="filterGallery('party', this)">Party</button>
+            <button class="filter-btn" onclick="filterGallery('bridal', this)">Bridal</button>
+            <button class="filter-btn" onclick="filterGallery('traditional', this)">Traditional</button>
+            <button class="filter-btn" onclick="filterGallery('festive', this)">Festive</button>
+        </div>
+
+        <div class="makeup-grid">
+
+            <article class="makeup-card" data-category="natural">
+                <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&auto=format&fit=crop"
+                     alt="Natural beauty inspiration" loading="lazy">
+                <div class="makeup-info">
+                    <h3>🌸 Natural Makeup</h3>
+                    <p>A simple, fresh look for everyday occasions.</p>
+                </div>
+            </article>
+
+            <article class="makeup-card" data-category="casual">
+                <img src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?w=800&auto=format&fit=crop"
+                     alt="Casual beauty inspiration" loading="lazy">
+                <div class="makeup-info">
+                    <h3>☁️ Casual Makeup</h3>
+                    <p>Soft colours for a relaxed outing.</p>
+                </div>
+            </article>
+
+            <article class="makeup-card" data-category="party">
+                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop"
+                     alt="Glam makeup inspiration" loading="lazy">
+                <div class="makeup-info">
+                    <h3>✨ Party Makeup</h3>
+                    <p>Explore glamorous looks for special events.</p>
+                </div>
+            </article>
+
+            <article class="makeup-card" data-category="bridal">
+                <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&auto=format&fit=crop"
+                     alt="Beauty products and makeup inspiration" loading="lazy">
+                <div class="makeup-info">
+                    <h3>💍 Bridal Inspiration</h3>
+                    <p>Makeup ideas for wedding celebrations.</p>
+                </div>
+            </article>
+
+            <article class="makeup-card" data-category="traditional">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop"
+                     alt="Traditional fashion inspiration" loading="lazy">
+                <div class="makeup-info">
+                    <h3>🌺 Traditional Style</h3>
+                    <p>Classic looks for traditional outfits.</p>
+                </div>
+            </article>
+
+            <article class="makeup-card" data-category="festive">
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&auto=format&fit=crop"
+                     alt="Festive fashion inspiration" loading="lazy">
+                <div class="makeup-info">
+                    <h3>🎉 Festive Makeup</h3>
+                    <p>Colourful inspiration for festive occasions.</p>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- MAKEUP SUGGESTIONS -->
+    <section id="makeup" class="section">
+        <h2>💄 Makeup Suggestions</h2>
+
+        <label for="occasion">Choose Occasion</label>
+        <select id="occasion">
+            <option value="college">College</option>
+            <option value="casual">Casual Outing</option>
+            <option value="party">Party</option>
+            <option value="wedding">Wedding</option>
+            <option value="traditional">Traditional</option>
+            <option value="festive">Festive</option>
+            <option value="natural">Natural</option>
+        </select>
+
+        <label for="makeupColour">Choose Outfit Colour</label>
+        <select id="makeupColour">
+            <option value="pink">Pink</option>
+            <option value="blue">Blue</option>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+            <option value="purple">Purple</option>
+        </select>
+
+        <button class="action-btn" onclick="getSuggestion()">Get Makeup Suggestion ✨</button>
+
+        <div id="suggestionResult" class="result" aria-live="polite">
+            Your makeup suggestion will appear here.
+        </div>
+    </section>
+
+    <!-- OUTFIT MATCHING -->
+    <section id="outfit" class="section">
+        <h2>👗 Outfit Matching</h2>
+
+        <label for="outfitColour">Select Outfit Colour</label>
+        <select id="outfitColour">
+            <option value="pink">Pink</option>
+            <option value="blue">Blue</option>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+            <option value="purple">Purple</option>
+        </select>
+
+        <label for="outfitStyle">Choose Outfit Style</label>
+        <select id="outfitStyle">
+            <option value="casual">Casual</option>
+            <option value="traditional">Traditional</option>
+            <option value="party">Party</option>
+        </select>
+
+        <button class="action-btn" onclick="matchOutfit()">Match My Outfit 👗</button>
+
+        <div id="outfitResult" class="result" aria-live="polite">
+            Your outfit matching suggestions will appear here.
+        </div>
+    </section>
+
+    <!-- PREFERENCES -->
+    <section id="preferences" class="section">
+        <h2>✨ Beauty Preferences</h2>
+
+        <label for="preferenceOccasion">Favourite Occasion</label>
+        <select id="preferenceOccasion">
+            <option value="college">College</option>
+            <option value="casual">Casual Outing</option>
+            <option value="party">Party</option>
+            <option value="wedding">Wedding</option>
+            <option value="traditional">Traditional</option>
+            <option value="festive">Festive</option>
+            <option value="natural">Natural</option>
+        </select>
+
+        <label for="preferenceColour">Favourite Outfit Colour</label>
+        <select id="preferenceColour">
+            <option value="pink">Pink</option>
+            <option value="blue">Blue</option>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+            <option value="purple">Purple</option>
+        </select>
+
+        <button class="action-btn" onclick="savePreferences()">Save Preferences 💗</button>
+
+        <div id="preferenceResult" class="result" aria-live="polite">
+            Your saved preferences will appear here.
+        </div>
+    </section>
+
+    <!-- BEAUTY ASSISTANT -->
+    <section id="assistant" class="section">
+        <h2>🤖 GlamSync Beauty Assistant</h2>
+
+        <label for="userQuestion">Ask a Beauty Question</label>
+        <input type="text" id="userQuestion" placeholder="Example: Makeup for college">
+
+        <button class="action-btn" onclick="askGlamSync()">Ask GlamSync</button>
+
+        <div id="aiAnswer" class="result" aria-live="polite">
+            Hello! Ask me a beauty question. 💗
+        </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="history" class="section">
+        <h2>📜 Makeup History</h2>
+
+        <div id="historyList" aria-live="polite">Loading history...</div>
+
+        <button class="secondary-btn" onclick="clearHistory()">Clear History</button>
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2026 GlamSync | Beauty Meets Technology 💖</p>
+</footer>
+
+<script>
+const API = "/api/makeup";
+
+const suggestions = {
+    college: "Try a simple, comfortable look with lip balm or a subtle lip tint.",
+    casual: "Try a natural look with a lip tint and a little blush if you like.",
+    party: "Try a statement lip colour or a soft shimmer eye look.",
+    wedding: "Coordinate your eye and lip colours with your outfit.",
+    traditional: "Try a classic liner look with colours that complement your outfit.",
+    festive: "Explore a festive shimmer or a colourful accent.",
+    natural: "Try a fresh, minimal look with shades you enjoy."
+};
+
+const colourMatches = {
+    pink: "Rose blush and soft pink or nude lipstick.",
+    blue: "Peach blush, nude lipstick and neutral eye makeup.",
+    black: "Berry lipstick, rose blush or a classic red lip.",
+    white: "Peach blush, pink lipstick and soft neutral eye makeup.",
+    green: "Warm nude lipstick, rose blush and bronze-toned eye makeup.",
+    red: "Neutral eye makeup and a nude or red lipstick.",
+    yellow: "Peach blush, coral lipstick and warm neutral eye makeup.",
+    purple: "Rose blush, mauve lipstick and soft neutral eye makeup."
+};
+
+const makeupImages = {
+    college: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&auto=format&fit=crop",
+    casual: "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?w=800&auto=format&fit=crop",
+    party: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop",
+    wedding: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&auto=format&fit=crop",
+    traditional: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop",
+    festive: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&auto=format&fit=crop",
+    natural: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&auto=format&fit=crop"
+};
+
+const outfitImages = {
+    pink: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format&fit=crop",
+    blue: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop",
+    black: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format&fit=crop",
+    white: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop",
+    green: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&auto=format&fit=crop",
+    red: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format&fit=crop",
+    yellow: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop",
+    purple: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&auto=format&fit=crop"
+};
+
+function capitalize(value) {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function makeImage(url, alt) {
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = alt;
+    img.loading = "lazy";
+    img.onerror = function() {
+        this.style.display = "none";
+    };
+    return img;
+}
+
+function addImage(container, url, alt, caption) {
+    const box = document.createElement("div");
+    box.className = "result-image";
+    box.appendChild(makeImage(url, alt));
+
+    const p = document.createElement("p");
+    p.textContent = caption;
+    box.appendChild(p);
+
+    container.appendChild(box);
+}
+
+async function apiRequest(path, options = {}) {
+    const response = await fetch(API + path, {
+        credentials: "include",
+        headers: {"Content-Type": "application/json"},
+        ...options
+    });
+
+    if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+    }
+
+    if (response.status === 204) return null;
+
+    const type = response.headers.get("content-type") || "";
+    return type.includes("application/json") ? response.json() : null;
+}
+
+async function getSuggestion() {
+    const occasion = document.getElementById("occasion").value;
+    const colour = document.getElementById("makeupColour").value;
+    const result = document.getElementById("suggestionResult");
+
+    result.replaceChildren();
+
+    const heading = document.createElement("h3");
+    heading.textContent = "💖 Your Personal Makeup Suggestion";
+    result.appendChild(heading);
+
+    const text = document.createElement("p");
+    text.textContent =
+        "Occasion: " + capitalize(occasion) +
+        " | Outfit: " + capitalize(colour) + ". " +
+        suggestions[occasion] + " " + colourMatches[colour];
+
+    result.appendChild(text);
+
+    addImage(
+        result,
+        makeupImages[occasion],
+        capitalize(occasion) + " makeup inspiration",
+        capitalize(occasion) + " Makeup Inspiration"
+    );
+
+    try {
+        await apiRequest("/history", {
+            method: "POST",
+            body: JSON.stringify({
+                title: capitalize(occasion) + " - " + capitalize(colour),
+                details: suggestions[occasion] + " " + colourMatches[colour]
+            })
+        });
+        await displayHistory();
+    } catch (error) {
+        const notice = document.createElement("p");
+        notice.className = "notice";
+        notice.textContent =
+            "Database save unavailable. Check that the Spring Boot API is configured and you are logged in.";
+        result.appendChild(notice);
+    }
+}
+
+function matchOutfit() {
+    const colour = document.getElementById("outfitColour").value;
+    const style = document.getElementById("outfitStyle").value;
+    const result = document.getElementById("outfitResult");
+
+    const styleText = {
+        casual: "For casual wear, keep the colours soft and comfortable.",
+        traditional: "For traditional wear, try a classic liner or coordinated accent colour.",
+        party: "For party wear, you could add shimmer or a statement lip."
+    };
+
+    result.replaceChildren();
+
+    const heading = document.createElement("h3");
+    heading.textContent = "👗 Your Outfit Colour Match";
+    result.appendChild(heading);
+
+    const text = document.createElement("p");
+    text.textContent = capitalize(colour) + " outfit: " +
+        colourMatches[colour] + " " + styleText[style];
+    result.appendChild(text);
+
+    addImage(
+        result,
+        outfitImages[colour],
+        capitalize(colour) + " outfit inspiration",
+        capitalize(colour) + " Outfit Inspiration"
+    );
+}
+
+async function savePreferences() {
+    const occasion = document.getElementById("preferenceOccasion").value;
+    const outfitColour = document.getElementById("preferenceColour").value;
+    const result = document.getElementById("preferenceResult");
+
+    try {
+        await apiRequest("/preferences", {
+            method: "PUT",
+            body: JSON.stringify({occasion, outfitColour})
+        });
+
+        result.textContent = "Your preferences have been saved to your account! 💗";
+    } catch (error) {
+        result.textContent =
+            "Could not save to MySQL. Check the Spring Boot API, database connection and login session.";
+    }
+}
+
+async function loadPreferences() {
+    try {
+        const data = await apiRequest("/preferences");
+
+        if (data) {
+            if (data.occasion) {
+                document.getElementById("preferenceOccasion").value = data.occasion;
+            }
+            if (data.outfitColour) {
+                document.getElementById("preferenceColour").value = data.outfitColour;
+            }
+
+            document.getElementById("preferenceResult").textContent =
+                "Your saved preferences have been loaded. 💗";
+        }
+    } catch (error) {
+        document.getElementById("preferenceResult").textContent =
+            "Sign in and configure the backend to load database preferences.";
+    }
+}
+
+function askGlamSync() {
+    const question = document.getElementById("userQuestion")
+        .value.trim().toLowerCase();
+
+    let answer;
+
+    if (!question) {
+        answer = "Please type a beauty question first! 💗";
+    } else if (question.includes("college")) {
+        answer = "For college, try a comfortable, simple look and sunscreen suitable for your skin.";
+    } else if (question.includes("party")) {
+        answer = "For a party, you could try a shimmer eye look or a lipstick shade you love.";
+    } else if (question.includes("wedding")) {
+        answer = "For a wedding, coordinate your makeup colours with your outfit.";
+    } else if (question.includes("pink")) {
+        answer = colourMatches.pink;
+    } else if (question.includes("blue")) {
+        answer = colourMatches.blue;
+    } else if (question.includes("black")) {
+        answer = colourMatches.black;
+    } else if (question.includes("lipstick")) {
+        answer = "Choose a lipstick shade based on your outfit, the occasion and your personal preference.";
+    } else if (question.includes("skin") || question.includes("skincare")) {
+        answer = "A simple routine can include a gentle cleanser, moisturiser and daytime sunscreen suitable for your skin.";
+    } else {
+        answer = "Ask me about college makeup, party makeup, lipstick or outfit colours.";
+    }
+
+    document.getElementById("aiAnswer").textContent = answer;
+}
+
+async function displayHistory() {
+    const list = document.getElementById("historyList");
+    list.replaceChildren();
+
+    try {
+        const history = await apiRequest("/history");
+
+        if (!Array.isArray(history) || history.length === 0) {
+            list.textContent = "No makeup history yet!";
+            return;
+        }
+
+        history.forEach(item => {
+            const card = document.createElement("article");
+            card.className = "history-item";
+
+            const title = document.createElement("strong");
+            title.textContent = item.title || "Makeup look";
+
+            const details = document.createElement("p");
+            details.textContent = item.details || "";
+
+            const date = document.createElement("small");
+            date.textContent = item.createdAt
+                ? new Date(item.createdAt).toLocaleString()
+                : "";
+
+            card.append(title, details, date);
+            list.appendChild(card);
+        });
+    } catch (error) {
+        list.textContent =
+            "Database history is unavailable. Configure the Spring Boot API first.";
+    }
+}
+
+async function clearHistory() {
+    if (!confirm("Are you sure you want to clear your makeup history?")) {
+        return;
+    }
+
+    try {
+        await apiRequest("/history", {method: "DELETE"});
+        await displayHistory();
+    } catch (error) {
+        alert("Could not clear database history. Check the backend and login session.");
+    }
+}
+
+function filterGallery(category, button) {
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    document.querySelectorAll(".makeup-card").forEach(card => {
+        const show = category === "all" || card.dataset.category === category;
+        card.classList.toggle("hidden-card", !show);
+    });
+}
+
+function logout() {
+    window.location.href = "login.html";
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    loadPreferences();
+    displayHistory();
+});
+</script>
+
+</body>
+</html>
