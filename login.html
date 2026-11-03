@@ -169,4 +169,20 @@
             ) {
                 localStorage.setItem("isLoggedIn", "true");
 
-                message.style.color = "
+                message.style.color = "green";
+                message.innerText = "Login Successful!";
+
+                setTimeout(function() {
+                    window.location.href = "Dashboard.html";
+                }, 1000);
+
+            } else {
+                message.style.color = "red";
+                message.innerText = "Invalid Email or Password!";
+            }
+
+        });
+    </script>
+
+</body>
+</html>
